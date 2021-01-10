@@ -1,27 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './App.css';
 
 import { ThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core'
-import {} from '@material-ui/icons'
 
 import Home from './components/Home/Home'
 
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-      height: '100vh' 
-  },
+  root: {}  
 }))
 
 function App() {
 
+  const [darkMode, setDarkMode] = useState(false)
+
   const theme = createMuiTheme({
     palette: {
+      type: darkMode ? 'dark' : 'light',
       primary: {
-        main: '#ffffff'
+        main: '#f44336'
       },
       secondary: {
-        main: '#3f51b5'
+        main: '#3EA6FF'
+      },
+      background: {
+        default: darkMode ? '#232323' : '#fff',
+        dark: darkMode ? '#181818' : '#f4f6f8',
+        paper: darkMode ? '#232323' : '#fff'
       }
     }
   })
@@ -30,7 +35,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Home />
+      <Home darkMode={darkMode} setDarkMode={setDarkMode} />
     </ThemeProvider>
   );
 }
